@@ -25,6 +25,7 @@ public class Student {
 		this.year = in.nextInt();
 		
 		setStudentID();
+		enroll();
 	}
 	
 	//Generate 5 digit student ID
@@ -65,5 +66,5 @@ public class Student {
 				"\nEnrolled Courses: " + courses + 
 				"\nCurrent Balance: $" + balance);
 	}
-	
+
 }
