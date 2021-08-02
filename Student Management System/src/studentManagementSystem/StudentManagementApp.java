@@ -4,14 +4,16 @@ public class StudentManagementApp {
 
 	public static void main(String[] args) {
 		Student stu = new Student();
+		stu.enroll();
+		stu.payBalance(300);
+		stu.showStatus();
 		
 		//Ask for number of new students
 		
 		
 		//Create n number of new students
 		
-		
-		//TESTING GIT COMMIT FOR ERROR
+
 	}
 
 }

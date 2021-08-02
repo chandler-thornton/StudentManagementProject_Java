@@ -25,8 +25,6 @@ public class Student {
 		this.year = in.nextInt();
 		
 		setStudentID();
-		
-		enroll();
 	}
 	
 	//Generate 5 digit student ID
@@ -44,18 +42,28 @@ public class Student {
 	    while(!(course = in.nextLine()).equals("Q")) {
 	        courses.add(course);
 	    }
-		balance = (courses.size() - 1) * courseCost;
+		balance = (courses.size()) * courseCost;
 		
 		System.out.println(courses);
 	}
 	
 	//View student balance
-	
+	public void viewBalance() {
+		System.out.println("Current Balance: $" + balance);
+	}
 	
 	//Pay student tuition
-	
+	public void payBalance(int paymentAmt) {
+		balance = balance - paymentAmt;
+		System.out.println("Paid: $" + paymentAmt + "\nCurrent Balance: $" + balance);
+	}
 	
 	//Show student status (Name, ID, Enrolled courses, Balance)
-	
+	public void showStatus() {
+		System.out.println(firstName + " " + lastName + 
+				" (#" + studentID + ")" +
+				"\nEnrolled Courses: " + courses + 
+				"\nCurrent Balance: $" + balance);
+	}
 	
 }
