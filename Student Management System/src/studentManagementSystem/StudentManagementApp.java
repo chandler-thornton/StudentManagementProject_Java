@@ -3,6 +3,8 @@ package studentManagementSystem;
 public class StudentManagementApp {
 
 	public static void main(String[] args) {
+		Student stu = new Student();
+		
 		//Ask for number of new students
 		
 		

@@ -1,22 +1,53 @@
 package studentManagementSystem;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Student {
 	private String firstName;
 	private String lastName;
-	private String year;
-	private int id;
-	private String courses; //Array ?
-	private int balance;
-	private int courseCost = 600;
+	private int year;
+	private String studentID;
+	private ArrayList<String> courses = new ArrayList<String>();
+	private int balance = 0;
+	private static int courseCost = 600;
+	private static int staticID = 1000;
 	
 	//Constructor: Ask for name & year of new student
-	
+	public Student() {
+		Scanner in = new Scanner(System.in);
+		
+		System.out.println("Enter first name:");
+		this.firstName = in.nextLine();
+		System.out.println("Enter last name:");
+		this.lastName = in.nextLine();
+		System.out.println("1 - Freshman\n2 - Sophomore\n3 - Junior\n4 - Senior");
+		this.year = in.nextInt();
+		
+		setStudentID();
+		
+		enroll();
+	}
 	
 	//Generate 5 digit student ID
-	
+	private void setStudentID() {
+		//StudentID = Grade Level + StaticID
+		staticID++;
+		this.studentID = year + "" + staticID;
+	}
 	
 	//Enroll in courses from provided list (HIST 101, MATH 101, ENGL 101, CHEM 101, CS 101)
-	
+	public void enroll() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter course to enroll (Q to quit)");
+		String course;
+	    while(!(course = in.nextLine()).equals("Q")) {
+	        courses.add(course);
+	    }
+		balance = (courses.size() - 1) * courseCost;
+		
+		System.out.println(courses);
+	}
 	
 	//View student balance
 	
