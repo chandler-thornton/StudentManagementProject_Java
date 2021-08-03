@@ -12,7 +12,29 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import java.sql.*;
+
+
 public class StudentManagementApp implements ActionListener{
+	
+	//Connect to MySQL students database
+	public static Connection getConnection() throws Exception{
+		try {
+			String driver = "com.mysql.cj.jdbc.Driver";
+			String url = "jdbc:mysql://localhost:3306/jdbc_studentmanagementsystem";
+			String user = "root";
+			String pass = "ROOT";
+			Class.forName(driver);
+			
+			Connection conn = DriverManager.getConnection(url, user, pass);
+			System.out.println("Connected to DB");
+			return conn;
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
 	
 	private static ArrayList<Student> students = new ArrayList<Student>();
 	private static JLabel userLabel;
@@ -21,7 +43,10 @@ public class StudentManagementApp implements ActionListener{
 	private static JPasswordField passwordText;
 	private static JButton loginButton;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+		
+		getConnection();
+		
 		//JFrame
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
