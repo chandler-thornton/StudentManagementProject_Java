@@ -2,7 +2,10 @@ package studentManagementSystem;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -16,14 +19,21 @@ import java.sql.*;
 
 
 public class StudentManagementApp implements ActionListener{
-	
+
 	//Connect to MySQL students database
-	public static Connection getConnection() throws Exception{
+	public static Connection getConnection() throws IOException{
+		
+		//Read database login information from dbconfig.properties file
+		Properties prop = new Properties();
+		FileInputStream ip = new FileInputStream("C:\\Users\\chanm\\git\\StudentManagementProject_Java\\Student Management System\\src\\Resources\\dbconfig.properties");
+		prop.load(ip);
+				
+				
 		try {
 			String driver = "com.mysql.cj.jdbc.Driver";
-			String url = "jdbc:mysql://localhost:3306/jdbc_studentmanagementsystem";
-			String user = "root";
-			String pass = "ROOT";
+			String url = prop.getProperty("dburl");
+			String user = prop.getProperty("dbusername");
+			String pass = prop.getProperty("dbpassword");
 			Class.forName(driver);
 			
 			Connection conn = DriverManager.getConnection(url, user, pass);
@@ -45,7 +55,9 @@ public class StudentManagementApp implements ActionListener{
 
 	public static void main(String[] args) throws Exception {
 		
+		//Connect to MySQL students database
 		getConnection();
+		
 		
 		//JFrame
 		JFrame frame = new JFrame();
@@ -82,6 +94,7 @@ public class StudentManagementApp implements ActionListener{
 		
 		frame.setVisible(true);
 		
+		
 		//Ask for number of new students
 		Scanner in = new Scanner(System.in);
 		
@@ -101,6 +114,7 @@ public class StudentManagementApp implements ActionListener{
 		
 	}
 
+	//Login GUI 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String userInput = userText.getText();
