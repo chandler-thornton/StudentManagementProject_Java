@@ -8,3 +8,5 @@ This is a Java application that I am currently working on which functions as a s
 - Etc.
 
 In the future I plan on using this project to better my understanding of technologies such as **Swing GUI** and **MySQL**.
+
+(For complexity's sake, MySQL schema / setup will be left out of repository)
