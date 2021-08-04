@@ -1,5 +1,6 @@
 package studentManagementSystem;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,12 +10,13 @@ public class Student {
 	private int year;
 	private String studentID;
 	private ArrayList<String> courses = new ArrayList<String>();
+	private String courseString;
 	private int balance = 0;
 	private static int courseCost = 600;
 	private static int staticID = 1000;
 	
 	//Constructor: Ask for name & year of new student
-	public Student() {
+	public Student() throws IOException {
 		Scanner in = new Scanner(System.in);
 		
 		System.out.println("Enter first name:");
@@ -26,6 +28,12 @@ public class Student {
 		
 		setStudentID();
 		enroll();
+		coursesToString();
+		
+		StudentManagementApp.getStatement("INSERT INTO students"
+				+ " (studentID, firstname, lastname, schoolYear, courses, balance)"
+				+ " VALUES (" + studentID + ", '" + firstName + "', '" + lastName + "', " + year + ", '" + courseString + "', " + balance + ")");
+		StudentManagementApp.getConnection();
 	}
 	
 	//Generate 5 digit student ID
@@ -44,8 +52,17 @@ public class Student {
 	        courses.add(course);
 	    }
 		balance = (courses.size()) * courseCost;
+	}
+	
+	//Convert ArrayList courses to string
+	public void coursesToString() {
+		StringBuilder sb = new StringBuilder();
+		for(String course : courses) {
+			sb.append(course);
+			sb.append(" ");
+		}
 		
-		System.out.println(courses);
+		courseString = sb.toString();
 	}
 	
 	//View student balance

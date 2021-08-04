@@ -9,6 +9,10 @@ import java.sql.*;
 
 
 public class StudentManagementApp{
+	
+	private static String stmt;
+	public static String currentUser;
+	public static int currentID;
 
 	//Connect to MySQL students database
 	public static Connection getConnection() throws IOException{
@@ -27,7 +31,10 @@ public class StudentManagementApp{
 			Class.forName(driver);
 			
 			Connection conn = DriverManager.getConnection(url, user, pass);
-			System.out.println("Connected to DB");
+			
+			Statement statement = conn.createStatement();
+			statement.executeUpdate(stmt);
+			
 			return conn;
 		} catch(Exception e) {
 			System.out.println(e);
@@ -36,30 +43,27 @@ public class StudentManagementApp{
 		return null;
 	}
 	
-	private static ArrayList<Student> students = new ArrayList<Student>();
+	public static void getStatement(String statementInput) {
+		stmt = statementInput;
+	}
 
+	public static boolean login() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Username (First Name):");
+		return false;
+	}
+	
 	public static void main(String[] args) throws Exception {
-		
-		//Connect to MySQL students database
-		getConnection();
-		
-		//Ask for number of new students
 		Scanner in = new Scanner(System.in);
 		
-		System.out.println("Number of new students:");
-		int numNewStudents = in.nextInt();
-		
-		//Create n number of new students
-		for(int i = 0; i < numNewStudents; i++) {
-			students.add(new Student());
+		System.out.println("STUDENT DATABASE\n1)Login\n2)Add New Student");
+		int loginPageInput = in.nextInt();
+		if(loginPageInput == 1) {
+			login();
 		}
-		
-		//Show status of all students
-		for(int i = 0; i < students.size(); i++) {
-			students.get(i).showStatus();
-			System.out.println();
+		else if(loginPageInput == 2) {
+			new Student();
 		}
-		
 	}
 
 }
