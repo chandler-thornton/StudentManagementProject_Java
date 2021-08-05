@@ -8,12 +8,10 @@ public class Student {
 	private String firstName;
 	private String lastName;
 	private int year;
-	private String studentID;
 	private ArrayList<String> courses = new ArrayList<String>();
 	private String courseString;
 	private int balance = 0;
 	private static int courseCost = 600;
-	private static int staticID = 1000;
 	
 	//Constructor: Ask for name & year of new student
 	public Student() throws IOException {
@@ -26,21 +24,14 @@ public class Student {
 		System.out.println("1 - Freshman\n2 - Sophomore\n3 - Junior\n4 - Senior");
 		this.year = in.nextInt();
 		
-		setStudentID();
 		enroll();
 		coursesToString();
 		
-		StudentManagementApp.getStatement("INSERT INTO students"
-				+ " (studentID, firstname, lastname, schoolYear, courses, balance)"
-				+ " VALUES (" + studentID + ", '" + firstName + "', '" + lastName + "', " + year + ", '" + courseString + "', " + balance + ")");
-		StudentManagementApp.getConnection();
-	}
-	
-	//Generate 5 digit student ID
-	private void setStudentID() {
-		//StudentID = Grade Level + StaticID
-		staticID++;
-		this.studentID = year + "" + staticID;
+		StudentManagementApp.getWriteStatement("INSERT INTO students"
+				+ " (firstname, lastname, schoolYear, courses, balance)"
+				+ " VALUES (" + "'" + firstName + "', '" + lastName + "', " + year + ", '" + courseString + "', " + balance + ")");
+		StudentManagementApp.studentWrite();
+		StudentManagementApp.menu();
 	}
 	
 	//Enroll in courses from provided list (HIST 101, MATH 101, ENGL 101, CHEM 101, CS 101)
@@ -79,7 +70,6 @@ public class Student {
 	//Show student status (Name, ID, Enrolled courses, Balance)
 	public void showStatus() {
 		System.out.println(firstName + " " + lastName + 
-				" (#" + studentID + ")" +
 				"\nEnrolled Courses: " + courses + 
 				"\nCurrent Balance: $" + balance);
 	}
