@@ -1,6 +1,6 @@
 ## Student Management System
 
-This is a Java application that I am currently working on which functions as a student management system that performs all of the basic tasks a school admin / student may need to do including:
+This is a Java application which functions as a student management system that performs all of the basic tasks a school admin / student may need to do including:
 - Adding and removing students
 - Collecting information from each student such as name and grade level and assigning them a unique student ID
 - Allow students to enroll and drop classes, which will affect their tuition
